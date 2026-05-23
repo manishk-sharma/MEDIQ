@@ -106,80 +106,95 @@ function getfee(val) {
 									
 									<div class="row margin-top-30">
 										<div class="col-lg-8 col-md-12">
-											<div class="panel panel-white">
+											<div class="panel panel-white booking-panel">
 												<div class="panel-heading">
 													<h5 class="panel-title">Book Appointment</h5>
 												</div>
 												<div class="panel-body">
 								<p style="color:red;"><?php echo htmlentities($_SESSION['msg1']);?>
 								<?php echo htmlentities($_SESSION['msg1']="");?></p>	
-													<form role="form" name="book" method="post" >
+													<div class="booking-intro">
+														<p class="text-muted">Choose a specialization and doctor to see the fee, then select a date and time.</p>
+													</div>
+													<div class="booking-steps">
+														<div class="booking-step"><span class="step-number">1</span>Choose doctor</div>
+														<div class="booking-step"><span class="step-number">2</span>Pick date</div>
+														<div class="booking-step"><span class="step-number">3</span>Confirm time</div>
+													</div>
+													<form role="form" name="book" method="post" class="booking-form">
 														
 
-
-<div class="form-group">
-															<label for="DoctorSpecialization">
-																Doctor Specialization
-															</label>
-							<select name="Doctorspecialization" class="form-control" onChange="getdoctor(this.value);" required="required">
-																<option value="">Select Specialization</option>
+														<div class="row">
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="DoctorSpecialization">
+																		Doctor Specialization
+																	</label>
+																	<select name="Doctorspecialization" class="form-control" onChange="getdoctor(this.value);" required="required">
+																		<option value="">Select specialization</option>
 <?php $ret=mysqli_query($con,"select * from doctorspecilization");
 while($row=mysqli_fetch_array($ret))
 {
 ?>
-																<option value="<?php echo htmlentities($row['specilization']);?>">
-																	<?php echo htmlentities($row['specilization']);?>
-																</option>
-																<?php } ?>
-																
-															</select>
+																		<option value="<?php echo htmlentities($row['specilization']);?>">
+																			<?php echo htmlentities($row['specilization']);?>
+																		</option>
+<?php } ?>
+																	</select>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="doctor">
+																		Doctor
+																	</label>
+																	<select name="doctor" class="form-control" id="doctor" onChange="getfee(this.value);" required="required">
+																		<option value="">Select doctor</option>
+																	</select>
+																	<small class="booking-help">Pick a specialization first to load doctors.</small>
+																</div>
+															</div>
 														</div>
 
-
-
-
-														<div class="form-group">
-															<label for="doctor">
-																Doctors
-															</label>
-						<select name="doctor" class="form-control" id="doctor" onChange="getfee(this.value);" required="required">
-						<option value="">Select Doctor</option>
-						</select>
-														</div>
-
-
-
-
-
-														<div class="form-group">
-															<label for="consultancyfees">
-																Consultancy Fees
-															</label>
-					<select name="fees" class="form-control" id="fees"  readonly>
-						
-						</select>
+														<div class="row">
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="consultancyfees">
+																		Consultation Fee
+																	</label>
+																	<select name="fees" class="form-control" id="fees" readonly>
+																	</select>
+																	<small class="booking-help">Fee updates automatically when you choose a doctor.</small>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="AppointmentDate">
+																		Preferred Date
+																	</label>
+																	<input class="form-control datepicker" name="appdate" required="required" data-date-format="yyyy-mm-dd" placeholder="YYYY-MM-DD">
+																</div>
+															</div>
 														</div>
 														
-<div class="form-group">
-															<label for="AppointmentDate">
-																Date
-															</label>
-<input class="form-control datepicker" name="appdate"  required="required" data-date-format="yyyy-mm-dd">
-	
-														</div>
-														
-<div class="form-group">
-															<label for="Appointmenttime">
-														
-														Time
-													
-															</label>
-			<input class="form-control" name="apptime" id="timepicker1" required="required">eg : 10:00 PM
+														<div class="row">
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="Appointmenttime">
+																		Preferred Time
+																	</label>
+																	<input class="form-control" name="apptime" id="timepicker1" required="required" placeholder="10:00 AM">
+																	<small class="booking-help">Enter a time that works best for you.</small>
+																</div>
+															</div>
 														</div>														
 														
-														<button type="submit" name="submit" class="btn btn-o btn-primary">
-															Submit
-														</button>
+														<div class="booking-actions">
+															<button type="submit" name="submit" class="btn btn-primary">
+																Confirm Appointment
+															</button>
+															<span class="booking-note">You can review or reschedule from your dashboard.</span>
+														</div>
 													</form>
 												</div>
 											</div>
