@@ -1,7 +1,7 @@
 <?php
 session_start();
 error_reporting(0);
-include("include/config.php");
+require_once __DIR__ . "/include/config.php";
 if(isset($_POST['submit']))
 {
 $uname=$_POST['username'];

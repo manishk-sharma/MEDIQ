@@ -1,4 +1,7 @@
-<?php error_reporting(0);?>
+<?php
+error_reporting(0);
+require_once __DIR__ . '/config.php';
+?>
 <header class="navbar navbar-default navbar-static-top">
 					<!-- start: NAVBAR HEADER -->
 					<div class="navbar-header">

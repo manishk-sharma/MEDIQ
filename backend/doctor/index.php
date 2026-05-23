@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("include/config.php");
+require_once __DIR__ . "/include/config.php";
 error_reporting(0);
 if(isset($_POST['submit']))
 {
