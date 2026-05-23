@@ -2,7 +2,7 @@
 /* Create a default admin user if none exists
    Usage: visit this file in your browser once (e.g. http://localhost/mediq/backend/create_admin.php)
    Then remove or restrict access to this file for security. */
-include('include/config.php');
+require_once __DIR__ . '/include/config.php';
 
 $defaultUser = 'admin';
 $defaultPass = 'admin123';

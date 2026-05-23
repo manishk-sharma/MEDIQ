@@ -1,7 +1,7 @@
 <?php
 session_start();
 error_reporting(0);
-include('include/config.php');
+require_once __DIR__ . '/include/config.php';
 if(strlen($_SESSION['id']==0)) {
  header('location:logout.php');
   } else{
@@ -15,9 +15,13 @@ $sql=mysqli_query($con,"SELECT password FROM  doctors where password='$cpass' &&
 $num=mysqli_fetch_array($sql);
 if($num>0)
 {
-$npass=md5($_POST['npass']);
- $con=mysqli_query($con,"update doctors set password='$npass', updationDate='$currentTime' where id='$did'");
-$_SESSION['msg1']="Password Changed Successfully !!";
+	$npass = mysqli_real_escape_string($con, md5($_POST['npass']));
+	$result = mysqli_query($con, "UPDATE doctors SET password='$npass', updationDate='$currentTime' WHERE id='$did'");
+	if($result) {
+		$_SESSION['msg1'] = "Password Changed Successfully !!";
+	} else {
+		$_SESSION['msg1'] = "Something went wrong. Please try again.";
+	}
 }
 else
 {
@@ -28,6 +32,7 @@ $_SESSION['msg1']="Old Password not match !!";
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<link rel="shortcut icon" href="../frontend/assets/images/fav.jpg">
 		<title>Doctor  | change Password</title>
 		
 		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />

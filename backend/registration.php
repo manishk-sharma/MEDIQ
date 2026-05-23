@@ -1,19 +1,20 @@
 <?php
-include_once('include/config.php');
+require_once __DIR__ . '/include/config.php';
 if(isset($_POST['submit']))
 {
-$fname=$_POST['full_name'];
-$address=$_POST['address'];
-$city=$_POST['city'];
-$gender=$_POST['gender'];
-$email=$_POST['email'];
-$password=md5($_POST['password']);
-$query=mysqli_query($con,"insert into users(fullname,address,city,gender,email,password) values('$fname','$address','$city','$gender','$email','$password')");
-if($query)
-{
-	echo "<script>alert('Successfully Registered. You can login now');</script>";
-	//header('location:user-login.php');
-}
+	$fname = mysqli_real_escape_string($con, $_POST['full_name']);
+	$address = mysqli_real_escape_string($con, $_POST['address']);
+	$city = mysqli_real_escape_string($con, $_POST['city']);
+	$gender = mysqli_real_escape_string($con, $_POST['gender']);
+	$email = mysqli_real_escape_string($con, $_POST['email']);
+	$password = md5($_POST['password']);
+
+	$query = mysqli_query($con, "INSERT INTO users(fullname,address,city,gender,email,password) VALUES('$fname','$address','$city','$gender','$email','$password')");
+	if($query)
+	{
+		echo "<script>alert('Successfully Registered. You can login now');</script>";
+		//header('location:user-login.php');
+	}
 }
 ?>
 
@@ -23,6 +24,7 @@ if($query)
 
 	<head>
 		<title>User Registration - HDMIS</title>
+		<link rel="shortcut icon" href="../frontend/assets/images/fav.jpg">
 		
 		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">

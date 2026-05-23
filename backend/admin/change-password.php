@@ -1,7 +1,7 @@
 <?php
 session_start();
-//error_reporting(0);
-include('include/config.php');
+error_reporting(0);
+require_once __DIR__ . '/include/config.php';
 if(strlen($_SESSION['id']==0)) {
  header('location:logout.php');
   } else{
@@ -16,9 +16,13 @@ $sql=mysqli_query($con,"SELECT password FROM  admin where password='$cpass' && u
 $num=mysqli_fetch_array($sql);
 if($num>0)
 {
-$npass=$_POST['npass'];
- $con=mysqli_query($con,"update admin set password='$npass', updationDate='$currentTime' where username='$uname'");
-$_SESSION['msg1']="Password Changed Successfully !!";
+	$npass = mysqli_real_escape_string($con, $_POST['npass']);
+	$result = mysqli_query($con, "UPDATE admin SET password='$npass', updationDate='$currentTime' WHERE username='$uname'");
+	if($result) {
+		$_SESSION['msg1'] = "Password Changed Successfully !!";
+	} else {
+		$_SESSION['msg1'] = "Something went wrong. Please try again.";
+	}
 }
 else
 {
@@ -29,6 +33,7 @@ $_SESSION['msg1']="Old Password not match !!";
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<link rel="shortcut icon" href="../../frontend/assets/images/fav.jpg">
 		<title>Admin | change Password</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">

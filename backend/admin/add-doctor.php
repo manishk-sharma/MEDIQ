@@ -1,7 +1,7 @@
 <?php
 session_start();
 error_reporting(0);
-include('include/config.php');
+require_once __DIR__ . '/include/config.php';
 if(strlen($_SESSION['id']==0)) {
  header('location:logout.php');
   } else{
@@ -26,6 +26,7 @@ echo "<script>window.location.href ='manage-doctors.php'</script>";
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<link rel="shortcut icon" href="../../frontend/assets/images/fav.jpg">
 		<title>Admin | Add Doctor</title>
 		
 		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />

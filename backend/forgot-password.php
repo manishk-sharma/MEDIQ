@@ -54,7 +54,8 @@ echo "<script>window.location.href ='forgot-password.php'</script>";
 								Patient Password Recovery
 							</legend>
 							<p>
-								Please enter your Email and password to recover your password.<br />
+					<link rel="stylesheet" href="assets/css/styles.css">
+					<link rel="shortcut icon" href="../frontend/assets/images/fav.jpg">
 					
 							</p>
 

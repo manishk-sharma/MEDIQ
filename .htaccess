@@ -1,0 +1,8 @@
+# Serve the site favicon from frontend/assets/images/fav.jpg
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # If the request is for favicon.ico, serve the JPG from the frontend assets
+    RewriteRule ^favicon\.ico$ frontend/assets/images/fav.jpg [L]
+</IfModule>
+
+# No additional redirects required; rewrite handles favicon requests.

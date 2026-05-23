@@ -1,7 +1,7 @@
 <?php
 session_start();
-//error_reporting(0);
-include('include/config.php');
+error_reporting(0);
+require_once __DIR__ . '/include/config.php';
 include('include/checklogin.php');
 check_login();
 
@@ -72,10 +72,11 @@ function getfee(val) {
 
 
 
-	</head>
-	<body>
-		<div id="app">		
-<?php include('include/sidebar.php');?>
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <title> MEDIQ - Book Appointment </title>
+	    <link rel="shortcut icon" href="../frontend/assets/images/fav.jpg">
 			<div class="app-content">
 			
 						<?php include('include/header.php');?>

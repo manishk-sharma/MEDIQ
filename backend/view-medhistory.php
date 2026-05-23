@@ -1,37 +1,33 @@
 <?php
 session_start();
 error_reporting(0);
-include('include/config.php');
+require_once __DIR__ . '/include/config.php';
 include('include/checklogin.php');
 check_login();
 if(isset($_POST['submit']))
-  {
-    
-    $vid=$_GET['viewid'];
-    $bp=$_POST['bp'];
-    $bs=$_POST['bs'];
-    $weight=$_POST['weight'];
-    $temp=$_POST['temp'];
-   $pres=$_POST['pres'];
-   
- 
-      $query.=mysqli_query($con, "insert   tblmedicalhistory(PatientID,BloodPressure,BloodSugar,Weight,Temperature,MedicalPres)value('$vid','$bp','$bs','$weight','$temp','$pres')");
-    if ($query) {
-    echo '<script>alert("Medicle history has been added.")</script>';
-    echo "<script>window.location.href ='manage-patient.php'</script>";
-  }
-  else
-    {
-      echo '<script>alert("Something Went Wrong. Please try again")</script>';
-    }
+{
+		$vid = intval($_GET['viewid']);
+		$bp = mysqli_real_escape_string($con, $_POST['bp']);
+		$bs = mysqli_real_escape_string($con, $_POST['bs']);
+		$weight = mysqli_real_escape_string($con, $_POST['weight']);
+		$temp = mysqli_real_escape_string($con, $_POST['temp']);
+		$pres = mysqli_real_escape_string($con, $_POST['pres']);
 
-  
+		$query = mysqli_query($con, "INSERT INTO tblmedicalhistory (PatientID,BloodPressure,BloodSugar,Weight,Temperature,MedicalPres) VALUES ('$vid','$bp','$bs','$weight','$temp','$pres')");
+		if ($query) {
+				echo '<script>alert("Medical history has been added.")</script>';
+				echo "<script>window.location.href ='manage-patient.php'</script>";
+		} else {
+				echo '<script>alert("Something Went Wrong. Please try again")</script>';
+		}
+
 }
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<link rel="shortcut icon" href="../frontend/assets/images/fav.jpg">
 		<title>Users | Medical History</title>
 		
 		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />

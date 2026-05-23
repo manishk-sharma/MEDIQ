@@ -1,5 +1,5 @@
 <?php
-include('include/config.php');
+require_once __DIR__ . '/include/config.php';
 if(!empty($_POST["specilizationid"])) 
 {
 

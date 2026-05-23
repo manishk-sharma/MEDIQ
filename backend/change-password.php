@@ -1,7 +1,7 @@
 <?php
 session_start();
-//error_reporting(0);
-include('include/config.php');
+error_reporting(0);
+require_once __DIR__ . '/include/config.php';
 include('include/checklogin.php');
 check_login();
 date_default_timezone_set('Asia/Kolkata');// change according timezone
@@ -12,8 +12,13 @@ $sql=mysqli_query($con,"SELECT password FROM  users where password='".md5($_POST
 $num=mysqli_fetch_array($sql);
 if($num>0)
 {
- $con=mysqli_query($con,"update users set password='".md5($_POST['npass'])."', updationDate='$currentTime' where id='".$_SESSION['id']."'");
-$_SESSION['msg1']="Password Changed Successfully !!";
+	$npass = mysqli_real_escape_string($con, md5($_POST['npass']));
+	$result = mysqli_query($con, "UPDATE users SET password='$npass', updationDate='$currentTime' WHERE id='".$_SESSION['id']."'");
+	if($result) {
+		$_SESSION['msg1'] = "Password Changed Successfully !!";
+	} else {
+		$_SESSION['msg1'] = "Something went wrong. Please try again.";
+	}
 }
 else
 {
@@ -25,6 +30,7 @@ $_SESSION['msg1']="Old Password not match !!";
 <html lang="en">
 	<head>
 		<title>User  | change Password</title>
+		<link rel="shortcut icon" href="../frontend/assets/images/fav.jpg">
 		
 		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
